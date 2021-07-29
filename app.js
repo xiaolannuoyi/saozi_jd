@@ -52,11 +52,16 @@ async function start() {
 
   if (serverJ) {
     const path = "./result.txt";
-    let content = "";
+    let text = "";
     if (fs.existsSync(path)) {
-      content = fs.readFileSync(path, "utf8");
+      const content = fs.readFileSync(path, "utf8");
+      console.log(content);
+      text = content.split('\n');
+      text.length = 6;
+      text = text.join('\n')
+      console.log(text);
     }
-    await sendNotify("京东签到-" + new Date().toLocaleDateString(), content);
+    await sendNotify("京东签到-" + new Date().toLocaleDateString(), text);
     console.log('发送结果完毕')
   }
 }
