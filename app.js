@@ -48,21 +48,22 @@ async function start() {
     // 执行
     await exec('node JD_DailyBonus.js >> result.txt');
     console.log('执行完毕');
-
+    
+    const time = new Intl.DateTimeFormat('zh', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false,
+    }).format(new Date());
+    
     if (serverJ) {
         const path = './result.txt';
         if (fs.existsSync(path)) {
             const content = fs.readFileSync(path, 'utf8');
             console.log(content);
-            const time = new Intl.DateTimeFormat('zh', {
-                year: 'numeric',
-                month: '2-digit',
-                day: '2-digit',
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit',
-                hour12: false,
-            }).format(new Date());
 
             const result =
                 time +
