@@ -58,6 +58,7 @@ async function start() {
         second: '2-digit',
         hour12: false,
     }).format(new Date());
+
     let notify = '';
 
     if (serverJ) {
@@ -77,7 +78,7 @@ async function start() {
                     .join('\n');
             console.log(notify);
         }
-        await sendNotify('京东签到-' + time, notify);
+        await sendNotify('京东签到', notify);
         console.log('发送结果完毕');
     }
 }
