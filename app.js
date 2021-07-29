@@ -48,7 +48,7 @@ async function start() {
     // 执行
     await exec('node JD_DailyBonus.js >> result.txt');
     console.log('执行完毕');
-    
+
     const time = new Intl.DateTimeFormat('zh', {
         year: 'numeric',
         month: '2-digit',
@@ -58,14 +58,15 @@ async function start() {
         second: '2-digit',
         hour12: false,
     }).format(new Date());
-    
+    let notify = '';
+
     if (serverJ) {
         const path = './result.txt';
         if (fs.existsSync(path)) {
             const content = fs.readFileSync(path, 'utf8');
             console.log(content);
 
-            const result =
+            notify =
                 time +
                 '\n' +
                 content
@@ -74,9 +75,9 @@ async function start() {
                         return /【/.test(item) || /签到用时/.test(item);
                     })
                     .join('\n');
-            console.log(result);
+            console.log(notify);
         }
-        await sendNotify('京东签到-' + time, result);
+        await sendNotify('京东签到-' + time, notify);
         console.log('发送结果完毕');
     }
 }
